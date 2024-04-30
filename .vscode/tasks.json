@@ -7,7 +7,7 @@
             "args": [
                 // "/Zi",
                 "/favor:INTEL64",
-                "/O2",
+                "/O1",
                 "/EHsc",
                 "/nologo",
                 "/Fe${fileDirname}\\${fileBasenameNoExtension}.exe",
