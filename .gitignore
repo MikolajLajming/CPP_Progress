@@ -1,7 +1,6 @@
-.gitignore
-.vscode
-.vscode/tasks.json
-.projects/01_Beginner/01_couit_cin/main.exe
-.projects/01_Beginner/01_couit_cin/main.obj
-.projects/01_Beginner/01_couit_cin/main.pdb
-.projects/01_Beginner/01_couit_cin/vc140.pdb
+/.vscode/tasks.json
+/projects/01_Beginner/01_cout_cin/main.exe
+/projects/01_Beginner/01_cout_cin/main.obj
+/projects/01_Beginner/01_cout_cin/main.pdb
+/projects/01_Beginner/01_cout_cin/vc140.pdb
+/.gitignore
