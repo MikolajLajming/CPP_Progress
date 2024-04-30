@@ -21,6 +21,27 @@ int main(){
     cout << "double: " << sizeof(double) << " bytes." << endl;
     cout << "long double: " << sizeof(long double) << " bytes." << endl;
     cout <<  "======================================================" << endl;
-
+    cout << "Limits" << endl;
+    cout <<  "======================================================" << endl;
+    cout << "MIN value of char is: " << CHAR_MIN << "." <<endl;
+    cout << "MAX value of char is: " << CHAR_MAX << "." <<endl;
+    cout << "MAX value of short is: " << SHRT_MIN << "." <<endl;
+    cout << "MIN value of short is: " << SHRT_MAX << "." <<endl;
+    cout << "MIN value of int is: " << INT_MIN << "." <<endl;
+    cout << "MAX value of int is: " << INT_MAX << "." <<endl;
+    cout << "MIN value of long is: " << LONG_MIN << "." <<endl;
+    cout << "MAX value of long is: " << LONG_MAX << "." <<endl;
+    cout << "MIN value of long long is: " << LLONG_MIN << "." <<endl;
+    cout << "MAX value of long long is: " << LLONG_MAX << "." <<endl;
+    cout << "MAX value of unsigned int is: " << UINT_MAX << "." <<endl;
+    cout << "MAX value of unsigned long is: " << ULONG_MAX << "." <<endl;
+    cout << "MAX value of unsigned long long is: " << ULLONG_MAX << "." <<endl;
+    cout <<  "======================================================" << endl;
+    cout << "MIN value of float is: " << FLT_MIN << "." <<endl;
+    cout << "MAX value of float is: " << FLT_MAX << "." <<endl;
+    cout << "MAX value of double is: " << DBL_MIN << "." <<endl;
+    cout << "MIN value of double is: " << DBL_MAX << "." <<endl;
+    cout << "MIN value of long double is: " << LDBL_MIN << "." <<endl;
+    cout << "MAX value of long double is: " << LDBL_MAX << "." <<endl;
     return 0;
 }
