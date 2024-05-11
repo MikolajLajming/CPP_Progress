@@ -13,10 +13,11 @@ int main()
     for(size_t i{input.size()}; i > 0; --i){
         temp_string.clear();
         for(size_t j{1}; j < input.size(); ++j){
-            if(i <= j)
-                temp_string += input.at(j-i);
-            else
+            if(j < i)
                 temp_string += ' ';
+            else
+                temp_string += input.at(j-i);
+
         }
         for(size_t k {input.size()}; k > 0; --k){
             if(k >= i)
