@@ -65,34 +65,43 @@ int main()
                 break;
             case 'm':
             case 'M':
-                for(auto i: items)
-                    mean += i;
-                mean /= items.size();
-                std::cout << "The mean of all items in list is: "
-                            << mean << std::endl;
-                mean = 0.0;
+                if(items.size() > 0){
+                    for(auto i: items)
+                        mean += i;
+                    mean /= items.size();
+                    std::cout << "The mean of all items in list is: "
+                                << mean << std::endl;
+                    mean = 0.0;                    
+                } else
+                    std::cout << "\nNo items in list!" << std::endl;
                 break;
             case 's':
             case 'S':
-                temp = items.at(0);
-                for(auto i: items)
-                    if(temp > i)
-                        temp = i;
-                std::cout << "\nThe smallest item in the list is: "
-                            // << "your PP xD"
-                            << temp << std::endl;
-                temp = 0;
+                if(items.size() > 0){            
+                    temp = items.at(0);
+                    for(auto i: items)
+                        if(temp > i)
+                            temp = i;
+                    std::cout << "\nThe smallest item in the list is: "
+                                // << "your PP xD"
+                                << temp << std::endl;
+                    temp = 0;
+                } else
+                    std::cout << "\nNo items in list!" << std::endl;                
                 break;
             case 'l':
             case 'L':
-                temp = items.at(0);
-                for(auto i: items)
-                    if(temp < i)
-                        temp = i;            
-                std::cout << "\nThe largest item in the list is: "
-                            // << "my PP (-_-)"
-                            << temp << std::endl;
-                temp = 0;
+                if(items.size() > 0){            
+                    temp = items.at(0);
+                    for(auto i: items)
+                        if(temp < i)
+                            temp = i;            
+                    std::cout << "\nThe largest item in the list is: "
+                                // << "my PP (-_-)"
+                                << temp << std::endl;
+                    temp = 0;
+                } else
+                    std::cout << "\nNo items in list!" << std::endl;                
                 break;
             case 'q':
             case 'Q':
