@@ -3,31 +3,27 @@
 int main() 
 { 
     std::cout << "Hello, simple something here. We're gonna ask you to enter some integers and we'll put them into a list you can iteract with." << std::endl;
-    bool done{false};
     int number_of_integers{0};
 
-    do{
-
-        std::cout << "How many items in the list do you want to enter?: ";
-        std::cin >> number_of_integers;
-        if(number_of_integers <= 0)
-            std::cout << "\nPlease enter positive integer!" << std::endl;
-        else 
-            done = true;
-
-    } while(!done);
+    std::cout << "How many items in the list do you want to enter?: ";
+    std::cin >> number_of_integers;
 
     std::vector<int> items{};
     int temp{0};
 
-    for(int i{1}; i <= number_of_integers; ++i){
-        std::cout << "Please enter item no " << i << ": ";
-        std::cin >> temp;
-        items.push_back(temp);
+    if(number_of_integers > 0){
+        for(int i{1}; i <= number_of_integers; ++i){
+            std::cout << "Please enter item no " << i << ": ";
+            std::cin >> temp;
+            items.push_back(temp);
+        }
+        temp = 0;
+        number_of_integers = 0;
     }
     
     char selection{0};
     double mean{0.0};
+    bool done{false};
 
     do {
         std::cout << "\nWhat do you want to do with the list?" << std::endl
@@ -42,10 +38,11 @@ int main()
         switch(selection){
             case 'p':
             case 'P': 
-                std::cout << "\nPrinting numbers...\n" << std::endl;
+                std::cout << "\nPrinting numbers...\n" << std::endl
+                    << "[ ";
                 for(auto i: items)
                     std::cout << i << " ";
-                std::cout << std::endl;
+                std::cout << "]" << std::endl;
                 break;
             case 'a':
             case 'A':
@@ -62,7 +59,9 @@ int main()
                     std::cin >> temp;
                     items.push_back(temp);
                 }
+                number_of_integers = 0;
                 temp = 0;
+                done = false;
                 break;
             case 'm':
             case 'M':
@@ -82,6 +81,7 @@ int main()
                 std::cout << "\nThe smallest item in the list is: "
                             // << "your PP xD"
                             << temp << std::endl;
+                temp = 0;
                 break;
             case 'l':
             case 'L':
@@ -92,6 +92,7 @@ int main()
                 std::cout << "\nThe largest item in the list is: "
                             // << "my PP (-_-)"
                             << temp << std::endl;
+                temp = 0;
                 break;
             case 'q':
             case 'Q':
