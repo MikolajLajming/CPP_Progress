@@ -19,6 +19,11 @@ int main()
         }
         temp = 0;
         number_of_integers = 0;
+        std::cout << "\nThe list looks like this now:\n" << std::endl
+                    << "[ ";
+        for(auto i: items)
+            std::cout << i << " ";
+        std::cout << "]" << std::endl;        
     }
     
     char selection{0};
@@ -59,6 +64,11 @@ int main()
                     std::cin >> temp;
                     items.push_back(temp);
                 }
+                std::cout << "\nThe list looks like this now:\n" << std::endl
+                            << "[ ";
+                for(auto i: items)
+                    std::cout << i << " ";
+                std::cout << "]" << std::endl;                
                 number_of_integers = 0;
                 temp = 0;
                 done = false;
