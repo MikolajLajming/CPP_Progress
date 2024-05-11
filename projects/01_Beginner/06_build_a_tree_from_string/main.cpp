@@ -9,7 +9,6 @@ int main()
     getline(cin, input);
 
     string temp_string{};
-    vector<string> tree{};
 
     for(size_t i{input.size()}; i > 0; --i){
         temp_string.clear();
