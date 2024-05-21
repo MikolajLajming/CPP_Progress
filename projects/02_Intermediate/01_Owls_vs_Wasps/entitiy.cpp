@@ -15,9 +15,12 @@ Entity::Entity(uint16_t id, uint16_t type) : entity_id{id}, //
                                                 {};
 
 Entity::~Entity(){
+    // std::cout << entity_name << " fucking dies!" << std::endl;
+    // die();
 };
 
 uint16_t Entity::attack(int dice_roll){
+    // std::cout << entity_name << " says: JUST DIE ALREADY!" << std::endl;
     return calculate_damage(entity_b_attack, dice_roll);
 }
 
@@ -35,10 +38,10 @@ bool Entity::check_if_alive(){
 void Entity::die(){
     entity_hp = 0;
     alive = false;
-    if(entity_type == 0)
-        std::cout << "Owl no." << entity_id << " is dying! Aghrrrhrh! " << std::endl;
-    else if(entity_type == 1)
-        std::cout << "Wasp no." << entity_id << " is dying! Bzzrrghrghzz! " << std::endl;
+    // if(entity_type == 0)
+    //     std::cout << "Owl no." << entity_id << " is dying! Aghrrrhrh! " << std::endl;
+    // else if(entity_type == 1)
+    //     std::cout << "Wasp no." << entity_id << " is dying! Bzzrrghrghzz! " << std::endl;
     // Entity::~Entity();
 };
 
@@ -65,7 +68,7 @@ uint16_t calculate_hp(uint16_t type){
     if(type == 0)
         return 150;
     else if(type == 1)
-        return 90;
+        return 120;
     else
         return 0;
 }
