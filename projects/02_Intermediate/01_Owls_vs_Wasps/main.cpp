@@ -2,7 +2,7 @@
 
 int main(){
 
-    std::cout << "Hello! Welcome in the great <<OWLS VS WASPS>> simulator!" << std::endl;
+    std::cout << "Hello! Welcome to the great <<OWLS VS WASPS>> simulator!" << std::endl;
 
 //TODO: Use input to determine type AND order of armies, getting rid of the awful "choice" variable
 //Something like: "Which army should go first?" and then construct first and second army
