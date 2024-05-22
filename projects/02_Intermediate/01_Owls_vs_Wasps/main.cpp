@@ -7,10 +7,10 @@ int main(){
 //TODO: Use input to determine type AND order of armies, getting rid of the awful "choice" variable
 //Something like: "Which army should go first?" and then construct first and second army
 
-    unsigned int owls_amount{ask_for_amount_of_entities(0)};
-    std::vector<Entity>* first_army{assemble_entities_army(owls_amount, 0)};
-    unsigned int wasps_amount{ask_for_amount_of_entities(1)};
-    std::vector<Entity>* second_army{assemble_entities_army(wasps_amount, 1)};
+    unsigned int owls_amount{ask_for_amount_of_entities(1)};
+    std::vector<Entity>* first_army{assemble_entities_army(owls_amount, 1)};
+    unsigned int wasps_amount{ask_for_amount_of_entities(2)};
+    std::vector<Entity>* second_army{assemble_entities_army(wasps_amount, 2)};
     
     std::cout << "Which army should go first?" << std::endl << std::endl
     << "1. Owls" << std::endl
@@ -102,9 +102,9 @@ int main(){
 
 unsigned int ask_for_amount_of_entities(int type){
         std::string type_name{"None"};
-        if(type == 0)
+        if(type == 1)
             type_name = "Owl";
-        else if(type == 1)
+        else if(type == 2)
             type_name = "Wasp";
         unsigned int entities_amount{0};
         do{
