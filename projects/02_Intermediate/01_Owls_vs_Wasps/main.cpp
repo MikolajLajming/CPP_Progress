@@ -4,8 +4,11 @@ std::random_device random_d;
 std::mt19937 mersienne_twister_engine(random_d());
 std::uniform_int_distribution<> distrib(1, 20);
 
+// I probably could do better by turning a Battle into a class, but it's good enough as for the first time
 
 int main(){
+
+    // The preparations
 
     std::cout << "Hello! Welcome to the great <<OWLS VS WASPS>> simulator!" << std::endl;
 
@@ -19,6 +22,8 @@ int main(){
 
     std::cout << "\nTwo armies: " << first_army_size << " " << say_type_name(which_army_first, first_army_size) << " and " 
             << second_army_size << " " << say_type_name(!which_army_first, second_army_size) << " will clash at dawn!" << std::endl;
+
+    // The Battle
 
     std::cout << "\nThe battle started!!!\n" << std::endl; 
 
@@ -34,6 +39,8 @@ int main(){
         turn(first_army_soldier_in_front, first_army_soldiers_alive, second_army_soldier_in_front, second_army_soldiers_alive);
     } while(second_army_soldiers_alive>0 && first_army_soldiers_alive>0);
 
+    // Aftermath
+
     unsigned int first_army_dead{(unsigned int)first_army->size() - first_army_soldiers_alive};
     unsigned int second_army_dead((unsigned int)second_army->size() - second_army_soldiers_alive);
 
@@ -45,7 +52,9 @@ int main(){
     } else{
         std::cout << say_type_name(!which_army_first, second_army_soldiers_alive) << " WON" << std::endl;
     }
+    
     std::cout << "Press Enter to exit...";
+
     std::cin.ignore();
     getchar();
 
@@ -56,7 +65,7 @@ bool ask_who_will_go_first(){
     bool bool_choice{false};
     int choice{0};
     do{
-        std::cout << "\nWhich army should go first?" << std::endl << std::endl
+        std::cout << "\nWhich army should attack the enemy first?" << std::endl << std::endl
         << "1. Owls" << std::endl
         << "2. Wasps" << std::endl << std::endl ;
 
