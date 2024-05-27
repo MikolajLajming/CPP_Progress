@@ -52,7 +52,7 @@ int main(){
     } else{
         std::cout << say_type_name(!which_army_first, second_army_soldiers_alive) << " WON" << std::endl;
     }
-    
+
     std::cout << "Press Enter to exit...";
 
     std::cin.ignore();
@@ -73,7 +73,7 @@ bool ask_who_will_go_first(){
         if(choice == 1)
             bool_choice = true;
         else if(choice == 2)
-            bool_choice = false;
+            break;
         else {
             choice = 0;
             std::cout << "\nSomething went wrong... Try again!" << std::endl << std::endl;
