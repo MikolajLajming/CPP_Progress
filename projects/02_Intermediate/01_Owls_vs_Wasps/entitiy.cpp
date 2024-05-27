@@ -1,6 +1,6 @@
 #include "entity.hpp"
 
-Entity::Entity(uint32_t id, uint16_t type) : entity_id{nullptr},
+Entity::Entity(uint32_t id, bool choice) : entity_id{nullptr},
                                              entity_type{nullptr},
                                              entity_b_attack{nullptr},
                                             //  entity_name{nullptr},
@@ -8,16 +8,16 @@ Entity::Entity(uint32_t id, uint16_t type) : entity_id{nullptr},
                                              alive{nullptr}
                                              {
                                                  entity_id = new uint32_t{id};
-                                                 entity_type = new uint16_t{type};
-                                                 if(type == 1){
+                                                 entity_type = new bool{choice};
+                                                 if(*entity_type){
                                                     entity_b_attack = new int{27};
                                                     // entity_name = new std::string{"Owl_" + std::to_string(*entity_id)};
                                                     entity_hp = new int{155};
                                                  }
-                                                 else if(type == 2){
-                                                    entity_b_attack = new int{12};
+                                                 else if(!(*entity_type)){
+                                                    entity_b_attack = new int{11};
                                                     // entity_name = new std::string{"Wasp_" + std::to_string(*entity_id)};
-                                                    entity_hp = new int{113};                                                     
+                                                    entity_hp = new int{112};                                                     
                                                  }
                                                  alive = new bool{true};
                                              };
@@ -50,10 +50,6 @@ Entity::~Entity(){
     delete entity_b_attack;
     // delete entity_name;
 };
-
-int Entity::attack(int dice_roll) const {
-    return calculate_damage(entity_b_attack, dice_roll);
-}
 
 void Entity::receive_damage(int damage){
     if(*entity_hp <= damage) {
