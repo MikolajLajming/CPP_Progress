@@ -18,6 +18,7 @@ Entity::Entity(uint32_t id, bool choice)
         // entity_name = new std::string{"Wasp_" + std::to_string(*entity_id)};
         entity_hp = new int{112};                                                     
         }
+        // std::cout << "Constructor used" << std::endl;
     };
 
 Entity::Entity(const Entity &source) 
@@ -27,6 +28,7 @@ Entity::Entity(const Entity &source)
         entity_hp = new int{*source.entity_hp};
         entity_b_attack = new int{*source.entity_b_attack};
         // entity_name = new std::string{*source.entity_name};
+        // std::cout << "Copy constructor used" << std::endl;
     }
 
 Entity::Entity(Entity &&source) noexcept
@@ -43,6 +45,7 @@ Entity::Entity(Entity &&source) noexcept
         source.entity_b_attack = nullptr;
         // entity_name = new std::string{*source.entity_name};
         // source.entity_name = nullptr;
+        // std::cout << "Move constructor used" << std::endl;
 }
 
 Entity::~Entity(){
@@ -52,6 +55,7 @@ Entity::~Entity(){
     delete alive;
     delete entity_b_attack;
     // delete entity_name;
+    // std::cout << "Destructor used" << std::endl;
 };
 
 void Entity::receive_damage(int damage){
@@ -68,23 +72,29 @@ bool Entity::check_if_alive() const{
 void Entity::die(){
     *entity_hp = 0;
     *alive = false;
+    // if(*entity_type)
+    //     std::cout << "Owl fucking dies!!!" << std::endl;
+    // else
+    //     std::cout << "Wasp fucking dies!!!" << std::endl;
 };
 
-int Entity::calculate_damage(const int* b_attack, int dice_roll) const {
+int Entity::calculate_damage(int dice_roll) const {
     if(dice_roll == 1)
         return 0;
-    else if(dice_roll < 4)
-        return *b_attack - 2;
+    else if(dice_roll == 2)
+        return *entity_b_attack / 2;
+    else if(dice_roll <= 4)
+        return *entity_b_attack - 2;
     else if(dice_roll < 7)
-        return *b_attack - 1;
+        return *entity_b_attack - 1;
     else if(dice_roll < 14)
-        return *b_attack;
+        return *entity_b_attack;
     else if(dice_roll < 17)
-        return *b_attack + 1;
-    else if(dice_roll < 19)
-        return *b_attack + 2;
+        return *entity_b_attack + 1;
+    else if(dice_roll <= 19)
+        return *entity_b_attack + 2;
     else if(dice_roll == 20)
-        return *b_attack * 2;
+        return *entity_b_attack * 2;
     else 
         return 0;
 }

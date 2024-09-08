@@ -15,42 +15,48 @@ int main(){
     bool which_army_first{ask_who_will_go_first()};
 
     unsigned int first_army_size{ask_for_amount_of_entities(which_army_first)};
-    std::vector<Entity>* first_army{assemble_entities_army(first_army_size, which_army_first)};
+    std::vector<Entity*> first_army;
+    for(unsigned int i{first_army_size}; i > 0; --i){
+        Entity* soldier(new Entity(i, which_army_first));
+        first_army.push_back(soldier);
+    }
 
     unsigned int second_army_size{ask_for_amount_of_entities(!which_army_first)};
-    std::vector<Entity>* second_army{assemble_entities_army(second_army_size, !which_army_first)};
+    std::vector<Entity*> second_army;
+    for(unsigned int i{second_army_size}; i > 0; --i){
+        Entity* soldier(new Entity(i, !which_army_first));
+        second_army.push_back(soldier);
+    }
 
-    std::cout << "\nTwo armies: " << first_army_size << " " << say_type_name(which_army_first, first_army_size) << " and " 
-            << second_army_size << " " << say_type_name(!which_army_first, second_army_size) << " will clash at dawn!" << std::endl;
+    std::string first_army_name = say_type_name(which_army_first, first_army_size);
+    std::string second_army_name = say_type_name(!which_army_first, second_army_size);
+
+    std::cout << "\nTwo armies: " << first_army_size << " " << first_army_name << " and " 
+            << second_army_size << " " << second_army_name << " will clash at dawn!" << std::endl;
 
     // The Battle
 
-    std::cout << "\nThe battle started!!!\n" << std::endl; 
-
-    int first_army_soldiers_alive{(int)first_army->size()};
-    int second_army_soldiers_alive{(int)second_army->size()};
-
-    Entity* first_army_soldier_in_front{nullptr};
-    first_army_soldier_in_front = &(*first_army).at(first_army_soldiers_alive-1);
-    Entity* second_army_soldier_in_front{nullptr};
-    second_army_soldier_in_front = &(*second_army).at(second_army_soldiers_alive-1);
+    std::cout << "\nThe battle started!!!\n" << std::endl;
 
     do{
-        turn(first_army_soldier_in_front, first_army_soldiers_alive, second_army_soldier_in_front, second_army_soldiers_alive);
-    } while(second_army_soldiers_alive>0 && first_army_soldiers_alive>0);
+        turn(first_army, second_army);
+    } while(first_army.size() > 0 && second_army.size() > 0);
 
     // Aftermath
 
-    unsigned int first_army_dead{(unsigned int)first_army->size() - first_army_soldiers_alive};
-    unsigned int second_army_dead((unsigned int)second_army->size() - second_army_soldiers_alive);
+    int first_army_soldiers_alive{(int)first_army.size()};
+    int second_army_soldiers_alive{(int)second_army.size()};
 
-    std::cout << first_army_dead << " " << say_type_name(which_army_first, first_army_dead) << " and " 
-            << second_army_dead << " " << say_type_name(!which_army_first, second_army_dead) << " perished!" << std::endl;
+    unsigned int first_army_dead{first_army_size - first_army_soldiers_alive};
+    unsigned int second_army_dead(second_army_size - second_army_soldiers_alive);
+
+    std::cout << first_army_dead << " " << first_army_name << " and " 
+            << second_army_dead << " " << second_army_name << " perished!" << std::endl;
 
     if(first_army_soldiers_alive>second_army_soldiers_alive){
-        std::cout << say_type_name(which_army_first, first_army_soldiers_alive) << " WON" << std::endl;
+        std::cout << first_army_name << " WON" << std::endl;
     } else{
-        std::cout << say_type_name(!which_army_first, second_army_soldiers_alive) << " WON" << std::endl;
+        std::cout << second_army_name << " WON" << std::endl;
     }
 
     std::cout << "Press Enter to exit...";
@@ -107,14 +113,6 @@ unsigned int ask_for_amount_of_entities(bool type){
     return entities_amount;
 }
 
-std::vector<Entity>* assemble_entities_army(unsigned int amount_of_entities, bool choice){
-    std::vector<Entity>* army = new std::vector<Entity>;
-    for(unsigned int i{amount_of_entities}; i > 0; --i){
-        (*army).push_back(Entity(i, choice));
-    }
-    return army;
-};
-
 std::string say_type_name(bool type, unsigned int amount){
     std::string name{""};
     if(type){
@@ -126,26 +124,27 @@ std::string say_type_name(bool type, unsigned int amount){
     return name;
 }
 
-void turn(Entity* &first_army_soldier_in_front, int &first_army_soldiers_alive, Entity* &second_army_soldier_in_front, int &second_army_soldiers_alive){
-        second_army_soldier_in_front->receive_damage(first_army_soldier_in_front->calculate_damage(first_army_soldier_in_front->entity_b_attack, distrib(mersienne_twister_engine)));
-        if(second_army_soldier_in_front->check_if_alive()){
-            first_army_soldier_in_front->receive_damage(second_army_soldier_in_front->calculate_damage(second_army_soldier_in_front->entity_b_attack, distrib(mersienne_twister_engine)));
-            if(!first_army_soldier_in_front->check_if_alive()){
-                if(first_army_soldiers_alive >= 2){
-                    first_army_soldier_in_front -= 1;
-                }
-                --first_army_soldiers_alive;
+void turn(std::vector<Entity*> &first_army, std::vector<Entity*> &second_army){
+        second_army.back()->receive_damage(first_army.back()->calculate_damage(distrib(mersienne_twister_engine)));
+        if(second_army.back()->check_if_alive()){
+            first_army.back()->receive_damage(second_army.back()->calculate_damage(distrib(mersienne_twister_engine)));
+            if(!first_army.back()->check_if_alive() && first_army.size() > 0){
+                delete first_army.back();
+                first_army.pop_back();
             }
-        } else if(second_army_soldiers_alive >=2 ){
-            second_army_soldier_in_front -= 1;
-            --second_army_soldiers_alive;
-            first_army_soldier_in_front->receive_damage(second_army_soldier_in_front->calculate_damage(second_army_soldier_in_front->entity_b_attack, distrib(mersienne_twister_engine)));
-            if(!first_army_soldier_in_front->check_if_alive()){
-                if(first_army_soldiers_alive >= 2){
-                    first_army_soldier_in_front -= 1;
-                }
-                --first_army_soldiers_alive;
+        } else if(second_army.size() > 1 ){
+            delete second_army.back();
+            second_army.pop_back();
+            first_army.back()->receive_damage(second_army.back()->calculate_damage(distrib(mersienne_twister_engine)));
+            if(!first_army.back()->check_if_alive() && first_army.size() > 0){
+                    delete first_army.back();
+                    first_army.pop_back();
             }
         } else
-            --second_army_soldiers_alive;
+            {
+                delete second_army.back();
+                second_army.pop_back();
+            }
+
+
 }
