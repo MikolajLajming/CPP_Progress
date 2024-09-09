@@ -41,6 +41,8 @@ int main(){
     do{
         turn(first_army, second_army);
     } while(first_army.size() > 0 && second_army.size() > 0);
+    first_army.shrink_to_fit();
+    second_army.shrink_to_fit();
 
     // Aftermath
 

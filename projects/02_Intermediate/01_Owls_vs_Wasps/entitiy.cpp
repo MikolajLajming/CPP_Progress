@@ -4,7 +4,7 @@ Entity::Entity(uint32_t id, bool choice)
     :   entity_id{new uint32_t{id}},
         entity_type{new bool{choice}},
         entity_b_attack{nullptr},
-        //  entity_name{nullptr},
+        // entity_name{nullptr},
         entity_hp{nullptr},
         alive{new bool{true}}
     {
@@ -37,13 +37,13 @@ Entity::Entity(Entity &&source) noexcept
         alive{new bool(*source.alive)}, 
         entity_hp{new int(*source.entity_hp)},
         entity_b_attack{new int(*source.entity_b_attack)}
+        // entity_name{new std::string{*source.entity_name}}
     {
         source.entity_id = nullptr;
         source.entity_type = nullptr;
         source.alive = nullptr;
         source.entity_hp = nullptr;
         source.entity_b_attack = nullptr;
-        // entity_name = new std::string{*source.entity_name};
         // source.entity_name = nullptr;
         // std::cout << "Move constructor used" << std::endl;
 }
